@@ -1,0 +1,16 @@
+{
+  "name": "StoryBooks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/romarios1987/StoryBooks.git",
+  "author": "romarios1987 <romios047@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.2"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  }
+}
