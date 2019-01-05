@@ -9,7 +9,20 @@ require('./config/passport')(passport);
 // Load Routes
 const auth = require('./routes/auth');
 
+
+
 const app = express();
+
+
+// Load Keys
+const keys = require('./config/keys');
+
+// Connect to Mongo
+mongoose.connect(keys.MongoURI, {useNewUrlParser: true})
+    .then(() => console.log(`MongoDB Connected...`))
+    .catch(err => console.log(err));
+
+
 
 app.get('/', (req, res) => {
     res.send('It works');
