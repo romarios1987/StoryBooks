@@ -1,4 +1,5 @@
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -9,18 +10,25 @@ require('./config/passport')(passport);
 
 
 // Load Routes
+const index = require('./routes/index');
 const auth = require('./routes/auth');
 
 
 const app = express();
+
+
+// Views, Layout EJS
+app.set('layout', 'layouts/main');
+app.set('view engine', 'ejs');
+
+app.use(expressLayouts);
+
 
 // Set Global Vars
 app.use((req, res, next) => {
     res.locals.user = req.user || null;
     next();
 });
-
-
 
 // Load Keys
 const keys = require('./config/keys');
@@ -29,12 +37,6 @@ const keys = require('./config/keys');
 mongoose.connect(keys.MongoURI, {useNewUrlParser: true})
     .then(() => console.log(`MongoDB Connected...`))
     .catch(err => console.log(err));
-
-
-
-app.get('/', (req, res) => {
-    res.send('It works');
-});
 
 
 // cookieParser
@@ -52,6 +54,7 @@ app.use(passport.session());
 
 
 // Use Routes
+app.use('/', index);
 app.use('/auth', auth);
 
 const port = process.env.PORT || 5000;
