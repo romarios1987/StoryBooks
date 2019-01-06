@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const passport = require('passport');
 
 // Passport Config
@@ -10,8 +12,14 @@ require('./config/passport')(passport);
 const auth = require('./routes/auth');
 
 
-
 const app = express();
+
+// Set Global Vars
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
+
 
 
 // Load Keys
@@ -27,6 +35,20 @@ mongoose.connect(keys.MongoURI, {useNewUrlParser: true})
 app.get('/', (req, res) => {
     res.send('It works');
 });
+
+
+// cookieParser
+app.use(cookieParser());
+// Express Session
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}));
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Use Routes
