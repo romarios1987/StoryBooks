@@ -24,12 +24,6 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 
-// Set Global Vars
-app.use((req, res, next) => {
-    res.locals.user = req.user || null;
-    next();
-});
-
 // Load Keys
 const keys = require('./config/keys');
 
@@ -52,6 +46,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+// Set Global Vars
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
 
 // Use Routes
 app.use('/', index);
