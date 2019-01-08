@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
     <div id="app" class="container">
         <a class="navbar-brand" href="/">StoryBooks</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -7,21 +7,20 @@
         </button>
         <div id="navbarNavDropdown" class="navbar-collapse collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
+                <% if(user){ %>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-cogs"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/stories/my"><i class="fas fa-user-tie"></i> My Stories</a>
+                    </li>
+                <% } %>
             </ul>
 
-            <ul class="navbar-nav">
+            <ul class="navbar-nav d-flex align-items-center">
                 <% if(user){ %>
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Welcome</a>
+                        <a class="nav-link" href="/dashboard">Welcome <%= user.firstName %></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -29,6 +28,10 @@
                 <% }else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/stories"><i class="fas fa-book"></i> Public Stories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger btn-sm" href="/auth/google"><i class="fab fa-google"></i> Login With
+                            Google</a>
                     </li>
                 <% } %>
             </ul>
