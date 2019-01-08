@@ -15,6 +15,12 @@
                         <a class="nav-link" href="/stories/my"><i class="fas fa-user-tie"></i> My Stories</a>
                     </li>
                 <% } %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/stories"><i class="fas fa-book"></i> Public Stories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about"> About</a>
+                    </li>
             </ul>
 
             <ul class="navbar-nav d-flex align-items-center">
@@ -23,12 +29,9 @@
                         <a class="nav-link" href="/dashboard">Welcome <%= user.firstName %></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a class="nav-link" href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </li>
                 <% }else { %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/stories"><i class="fas fa-book"></i> Public Stories</a>
-                    </li>
                     <li class="nav-item">
                         <a class="btn btn-danger btn-sm" href="/auth/google"><i class="fab fa-google"></i> Login With
                             Google</a>

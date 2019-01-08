@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -24,6 +25,9 @@ app.set('view engine', 'ejs');
 
 app.use(expressLayouts);
 
+
+// Static Folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Load Keys
 const keys = require('./config/keys');
@@ -54,7 +58,6 @@ app.use((req, res, next) => {
     res.locals.user = req.user || null;
     next();
 });
-
 // Use Routes
 app.use('/', index);
 app.use('/stories', stories);

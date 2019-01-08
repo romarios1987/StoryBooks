@@ -1,3 +1,12 @@
-<h2>Welcome <%= user ? user.firstName : '' %></h2>
-
-<h4>Your Stories</h4>
+<div class="col-12">
+    <% if(user){ %>
+        <div class="card bg-light mb-3 mt-4 text-center">
+            <div class="card-header">
+                <h2>Welcome <%= user.firstName %></h2>
+            </div>
+            <div class="card-body">
+                <a href="/stories/add" class="btn btn-success">Add Story</a>
+            </div>
+        </div>
+    <% } %>
+</div>
