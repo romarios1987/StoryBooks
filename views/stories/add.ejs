@@ -1,1 +1,37 @@
-<h1>Add Story</h1>
+<div class="col-sm-12 text-center">
+    <h2 class="mt-4">Add Story</h2>
+</div>
+
+<div class="col-md-8 offset-md-2 col-sm-12">
+    <form action="/stories" method="post">
+        <div class="form-group">
+            <label for="title"><strong>Title</strong></label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="status"><strong>Status</strong></label>
+            <select name="status" class="custom-select">
+                <option value="public" selected>Public</option>
+                <option value="private">Private</option>
+                <option value="unpublished">Unpublished</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" name="allowComments" class="custom-control-input" id="filled-in-box"
+                       checked="checked">
+                <label class="custom-control-label" for="filled-in-box">Allow Comments</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="body"><strong>Tell Us Your Story</strong></label>
+            <textarea class="form-control" name="body" id="body" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
