@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -17,6 +18,10 @@ const auth = require('./routes/auth');
 
 
 const app = express();
+
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 
 // Views, Layout EJS
@@ -50,7 +55,6 @@ app.use(session({
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 
 // Set Global Vars
