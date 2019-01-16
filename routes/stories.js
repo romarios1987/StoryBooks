@@ -10,6 +10,7 @@ const Story = require('../models/Story');
 // Stories Index
 router.get('/', (req, res) => {
     Story.find({status: 'public'})
+        // find all the fields from user collection
         .populate('user')
         .then(stories => {
 

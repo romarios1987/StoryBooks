@@ -1,25 +1,31 @@
-<h1>Index Story</h1>
-<div class="col-sm-12">
+
+
+<div class="col-sm-12"><h1>Index Story</h1></div>
+
+
     <% if (stories.length > 0) { %>
         <% for (story of stories) {
             const {title, date, body, id} = story;
         %>
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h4><%= title %> </h4>
-                    <p class="story-text"><%- body %></p>
-                    <div class="chip">
-                        <img src="<% user.image %>" alt="<%= user.firstName %>" width="96" height="96">
-                        <% user.firstName %>  <% user.lastName %>
-                    </div>
-                </div>
-                <div class="card-footer d-flex justify-content-around">
-                    <a class="btn btn-warning" href="/ideas/edit/<%= id %>">Edit</a>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-header bg-transparent d-flex justify-content-end">
+                    <a class="btn btn-outline-warning" href="/stories/edit/<%= id %>"><i class="far fa-edit"></i></a>
                     <form action="/ideas/<%= id %>?_method=DELETE" method="post">
                         <input type="hidden" name="_method" value="DELETE">
-                        <input type="submit" class="btn btn-danger" value="Delete">
+                        <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                     </form>
+                </div>
+                <div class="card-body">
+                    <h4><%= title %> </h4>
+                    <p class="story-text"><%= truncate(stripTags(body), 120) %></p>
+                    <div class="chip">
+                        <img src="<%= user.image %>" alt="<%= user.firstName %>" width="96" height="96">
+                        <%= user.firstName %>  <%= user.lastName %>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent d-flex justify-content-around">
+                    <a href="/stories/show/<%= id %>" class="btn btn-outline-success">Read more <i class="fas fa-caret-right"></i></a>
                 </div>
             </div>
         </div>
@@ -27,4 +33,3 @@
     <% }else { %>
         <p class="text-center">No stories found</p>
     <% } %>
-</div>

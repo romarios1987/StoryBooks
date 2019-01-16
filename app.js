@@ -7,6 +7,10 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 
+// Handlebars Helpers
+const {truncate, stripTags} = require('./helpers/correct_text');
+
+
 // Passport Config
 require('./config/passport')(passport);
 
@@ -18,6 +22,12 @@ const auth = require('./routes/auth');
 
 
 const app = express();
+
+
+// Use Helpers
+app.locals.truncate = truncate;
+app.locals.stripTags = stripTags;
+
 
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -36,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Load Keys
 const keys = require('./config/keys');
+
 
 // Connect to Mongo
 mongoose.connect(keys.MongoURI, {useNewUrlParser: true})
