@@ -8,7 +8,7 @@ const session = require('express-session');
 const passport = require('passport');
 
 // Handlebars Helpers
-const {truncate, stripTags} = require('./helpers/correct_text');
+const {truncate, stripTags, formatDate} = require('./helpers/correct_text');
 
 
 // Passport Config
@@ -27,7 +27,7 @@ const app = express();
 // Use Helpers
 app.locals.truncate = truncate;
 app.locals.stripTags = stripTags;
-
+app.locals.formatDate = formatDate;
 
 
 app.use(bodyParser.urlencoded({extended: false}));

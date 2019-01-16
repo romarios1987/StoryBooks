@@ -1,1 +1,25 @@
-<h1>Show Story</h1>
+<div class="col-sm-12"><h1>Show Story</h1></div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2><%= story.title %></h2>
+            <div class="info-story d-flex flex-column align-items-end">
+                <span>
+                    <img class="rounded-circle" src="<%= user.image %>" alt="<%= user.firstName %>" width="35"
+                         height="35">
+                    <a href="/stories/user/<%= story.user.id %>" class="text-monospace font-weight-bold"
+                       title="More stories"><%= user.firstName %> <%= user.lastName %></a>
+                </span>
+                <span><%= formatDate(story.date, 'MMMM Do YYYY, h:mm:ss a') %></span>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <%- story.body %>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</div>

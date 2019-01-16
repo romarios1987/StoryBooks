@@ -3,19 +3,29 @@ const router = express.Router();
 const {ensureAuthenticated, ensureGuest} = require('../helpers/auth');
 
 
-// User Model
+// Story Model
 const Story = require('../models/Story');
 
 
 // Stories Index
 router.get('/', (req, res) => {
     Story.find({status: 'public'})
-        // find all the fields from user collection
+    // find all the fields from user collection
         .populate('user')
         .then(stories => {
 
-            res.render('stories/index', {stories:stories});
+            res.render('stories/index', {stories: stories});
         });
+
+});
+
+// Show Single Story
+router.get('/show/:id', (req, res) => {
+    Story.findOne({_id: req.params.id})
+        .populate('user')
+        .then(story => {
+            res.render('stories/show', {story});
+        })
 
 });
 
@@ -27,7 +37,6 @@ router.get('/add', ensureAuthenticated, (req, res) => {
 
 
 // Process Add Story
-
 router.post('/', (req, res) => {
 
     let allowComments;
@@ -55,5 +64,6 @@ router.post('/', (req, res) => {
             res.redirect(`/stories/show/${story.id}`)
         });
 });
+
 
 module.exports = router;
