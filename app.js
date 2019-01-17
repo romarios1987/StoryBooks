@@ -6,9 +6,11 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
+const methodOverride = require('method-override');
+
 
 // Handlebars Helpers
-const {truncate, stripTags, formatDate} = require('./helpers/correct_text');
+const {truncate, stripTags, formatDate, select} = require('./helpers/correct_text');
 
 
 // Passport Config
@@ -28,11 +30,15 @@ const app = express();
 app.locals.truncate = truncate;
 app.locals.stripTags = stripTags;
 app.locals.formatDate = formatDate;
+app.locals.select = select;
 
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+
+// Method override middleware
+app.use(methodOverride('_method'));
 
 // Views, Layout EJS
 app.set('layout', 'layouts/main');
