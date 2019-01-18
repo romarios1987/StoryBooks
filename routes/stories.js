@@ -13,7 +13,6 @@ router.get('/', (req, res) => {
     // find all the fields from user collection
         .populate('user')
         .then(stories => {
-
             res.render('stories/index', {stories: stories});
         });
 
@@ -23,6 +22,7 @@ router.get('/', (req, res) => {
 router.get('/show/:id', (req, res) => {
     Story.findOne({_id: req.params.id})
         .populate('user')
+        .populate('comments.commentUser')
         .then(story => {
             res.render('stories/show', {story});
         })
@@ -112,5 +112,30 @@ router.delete('/:id', ensureAuthenticated, (req, res) => {
             res.redirect('/dashboard');
         })
 });
+
+/**
+ * Add comment
+ */
+
+
+router.post('/comment/:id', (req, res) => {
+    const {commentBody} = req.body;
+    Story.findOne({_id: req.params.id})
+        .then((story) => {
+            const newComment = {
+                commentBody,
+                commentUser: req.user.id
+            };
+
+            // Add to comments array
+            story.comments.unshift(newComment);
+
+            story.save()
+                .then(() => {
+                    res.redirect(`/stories/show/${story.id}`);
+                })
+        })
+});
+
 
 module.exports = router;

@@ -1,14 +1,13 @@
-
-
 <div class="col-sm-12"><h1>Index Story</h1></div>
 
 
+<div class="row-flex">
     <% if (stories.length > 0) { %>
         <% for (story of stories) {
             const {title, date, body, id} = story;
         %>
-        <div class="col-md-4">
-            <div class="card text-center">
+        <div class="col-lg-4 col-md-6 mb-3">
+            <div class="card text-center content">
                 <div class="card-header bg-transparent d-flex justify-content-end">
                     <a class="btn btn-outline-warning" href="/stories/edit/<%= id %>"><i class="far fa-edit"></i></a>
                 </div>
@@ -21,7 +20,8 @@
                     </div>
                 </div>
                 <div class="card-footer bg-transparent d-flex justify-content-around">
-                    <a href="/stories/show/<%= id %>" class="btn btn-outline-success">Read more <i class="fas fa-caret-right"></i></a>
+                    <a href="/stories/show/<%= id %>" class="btn btn-outline-success">Read more <i
+                                class="fas fa-caret-right"></i></a>
                 </div>
             </div>
         </div>
@@ -29,3 +29,5 @@
     <% }else { %>
         <p class="text-center">No stories found</p>
     <% } %>
+</div>
+
