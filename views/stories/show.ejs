@@ -3,7 +3,10 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h2><%= story.title %></h2>
+            <h2><%= story.title %>
+                <small><%- editIcon(story.user.id, user.id, story.id) %></small>
+
+            </h2>
             <div class="info-story d-flex flex-column align-items-end">
                 <span>
                     <img class="rounded-circle" src="<%= user.image %>" alt="<%= user.firstName %>" width="35"

@@ -9,6 +9,9 @@
         <div class="col-lg-4 col-md-6 mb-3">
             <div class="card text-center content">
                 <div class="card-header bg-transparent d-flex justify-content-end">
+                    <% if(user){ %>
+                        <%= editIcon(user.id, '../user', id) %>
+                    <% } %>
                     <a class="btn btn-outline-warning" href="/stories/edit/<%= id %>"><i class="far fa-edit"></i></a>
                 </div>
                 <div class="card-body">
@@ -17,6 +20,7 @@
                     <div class="chip">
                         <img src="<%= user.image %>" alt="<%= user.firstName %>" width="96" height="96">
                         <%= user.firstName %>  <%= user.lastName %>
+                        <%= user.email %>
                     </div>
                 </div>
                 <div class="card-footer bg-transparent d-flex justify-content-around">

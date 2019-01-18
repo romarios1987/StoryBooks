@@ -10,7 +10,7 @@ const methodOverride = require('method-override');
 
 
 // Handlebars Helpers
-const {truncate, stripTags, formatDate, select} = require('./helpers/correct_text');
+const {truncate, stripTags, formatDate, select, editIcon} = require('./helpers/correct_text');
 
 
 // Passport Config
@@ -31,6 +31,7 @@ app.locals.truncate = truncate;
 app.locals.stripTags = stripTags;
 app.locals.formatDate = formatDate;
 app.locals.select = select;
+app.locals.editIcon = editIcon;
 
 
 app.use(bodyParser.urlencoded({extended: false}));
