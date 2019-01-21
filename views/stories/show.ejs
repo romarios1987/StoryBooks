@@ -55,7 +55,10 @@
                         <div class="chip">
                             <img src="<%= comment.commentUser.image %>" alt="<%= comment.commentUser.firstName %>"
                                  width="96" height="96">
-                            <%= comment.commentUser.firstName %>  <%= comment.commentUser.lastName %>
+
+                            <a href="/stories/user/<%= comment.commentUser.id %>"
+                               class="text-monospace font-weight-bold"
+                               title="More stories"><%= comment.commentUser.firstName %> <%= comment.commentUser.lastName %></a>
                         </div>
                         <small><%= formatDate(comment.commentDate, 'MMMM Do YYYY, h:mm:ss a') %></small>
                     </div>

@@ -32,7 +32,7 @@ main {
     border-radius: 50%;
 }
 
-.row-flex {
+.wrap-flex {
     display: flex;
     flex-wrap: wrap;
 }
