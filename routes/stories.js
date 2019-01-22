@@ -14,7 +14,8 @@ router.get('/', (req, res) => {
         .sort({date: 'desc'})
         .then(stories => {
             res.render('stories/index', {
-                stories: stories
+                stories: stories,
+                title: 'Public Stories'
             });
         });
 });
@@ -46,14 +47,17 @@ router.get('/show/:id', (req, res) => {
 });
 
 // List Stories From User
-router.get('/user/:userId', (req, res) => {
+router.get('/user/:userId', ensureAuthenticated, (req, res) => {
     Story.find({
         user: req.params.userId,
         status: 'public'
     })
         .populate('user')
         .then(stories => {
-            res.render('stories/index', {stories})
+            res.render('stories/index', {
+                stories:stories,
+                title: `Stories: ${req.user.firstName} ${req.user.lastName}`
+            })
         })
 });
 
@@ -64,7 +68,10 @@ router.get('/my/', ensureAuthenticated, (req, res) => {
     })
         .populate('user')
         .then(stories => {
-            res.render('stories/index', {stories})
+            res.render('stories/index', {
+                stories:stories,
+                title: 'My Stories'
+            })
         })
 });
 
