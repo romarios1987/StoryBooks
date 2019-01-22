@@ -56,7 +56,7 @@ const keys = require('./config/keys');
 
 
 // Connect to Mongo
-mongoose.connect(keys.MongoURI, {useNewUrlParser: true})
+mongoose.connect(keys.mongoURI, {useNewUrlParser: true})
     .then(() => console.log(`MongoDB Connected...`))
     .catch(err => console.log(err));
 

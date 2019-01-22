@@ -1,27 +1,27 @@
-<div class="col-sm-12"><h1>Index Story</h1></div>
-
+<div class="col-sm-12">
+<h2 class="text-center mt-4 mb-4">Index Story</h2>
+</div>
 
 
     <% if (stories.length > 0) { %>
         <% for (story of stories) {
             const {title, date, body, id} = story;
         %>
-        <div class="col-lg-4 col-md-3 col-sm-6">
+        <div class="col-lg-4 col-md-3 col-sm-6 mb-4">
             <div class="card text-center content">
                 <div class="card-header bg-transparent d-flex justify-content-end">
                     <% if(user){ %>
-                        <%= editIcon(user.id, '../user', id) %>
+                        <%- editIcon(story.user.id, user.id, id) %>
                     <% } %>
-                    <a class="btn btn-outline-warning" href="/stories/edit/<%= id %>"><i class="far fa-edit"></i></a>
                 </div>
                 <div class="card-body">
                     <h4><%= title %> </h4>
                     <p class="story-text"><%= truncate(stripTags(body), 120) %></p>
                     <div class="chip">
-                        <img src="<%= user.image %>" alt="<%= user.firstName %>" width="96" height="96">
+                        <img src="<%= story.user.image %>" alt="<%= story.user.firstName %>" width="96" height="96">
                         <a href="/stories/user/<%= story.user.id %>" class="text-monospace font-weight-bold"
-                           title="More stories"><%= user.firstName %> <%= user.lastName %></a>
-                        <%= user.email %>
+                           title="More stories"><%= story.user.firstName %> <%= story.user.lastName %></a>
+                        <%= story.user.email %>
                     </div>
                 </div>
                 <div class="card-footer bg-transparent d-flex justify-content-around">
@@ -34,4 +34,6 @@
     <% }else { %>
         <p class="text-center">No stories found</p>
     <% } %>
+
+
 

@@ -10,13 +10,13 @@ const Story = require('../models/Story');
 // Stories Index
 router.get('/', (req, res) => {
     Story.find({status: 'public'})
-    // find all the fields from user collection
         .populate('user')
         .sort({date: 'desc'})
         .then(stories => {
-            res.render('stories/index', {stories: stories});
+            res.render('stories/index', {
+                stories: stories
+            });
         });
-
 });
 
 // Show Single Story
@@ -28,11 +28,12 @@ router.get('/show/:id', (req, res) => {
             //res.render('stories/show', {story});
 
             if (story.status === 'public') {
-                res.render('stories/show', {story});
+                res.render('stories/show', {story: story});
             } else {
+                // if user login
                 if (req.user) {
                     if (req.user.id === story.user._id) {
-                        res.render('stories/show', {story});
+                        res.render('stories/show', {story: story});
                     } else {
                         res.redirect('/stories');
                     }
@@ -82,7 +83,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
             if (story.user != req.user.id) {
                 res.redirect('/stories')
             } else {
-                res.render('stories/edit', {story});
+                res.render('stories/edit', {story: story});
             }
 
         });
